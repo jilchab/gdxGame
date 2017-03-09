@@ -19,7 +19,7 @@ public class Hero extends GameActor {
 	private TextureRegion textureRegion= new TextureRegion(new Texture(Gdx.files.internal("circle.png")));
 
 	public static final float DEFAULT_X = 0;
-	public static final float DEFAULT_Y = 0;
+	public static final float DEFAULT_Y = 2;
 	public static final float RADIUS = 2f;
 	public static final float DENSITY = 0.5f;
 	public static final Vector2 JUMPING_LINEAR_IMPULSE = new Vector2(0, 400f);

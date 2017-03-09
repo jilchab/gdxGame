@@ -37,11 +37,13 @@ public class GameStage extends Stage implements ContactListener{
 	private OrthographicCamera camera;
 	private Box2DDebugRenderer renderer;
 	List<Box> boxes;
+	List<Picks> picks;
 	Table tButtons;
-	Table tBoxes;
+	int level;
 
 	public GameStage() {
 		super();
+		level = 1;
 		setupWorld();
 		setupHero();
 		setupCamera();
@@ -68,8 +70,7 @@ public class GameStage extends Stage implements ContactListener{
 	@Override
 	public void draw() {
 
-		super.draw();
-		renderer.render(world, camera.combined);
+
 
 		Batch batch = getBatch();
 		batch.setProjectionMatrix(camera.combined);
@@ -78,8 +79,12 @@ public class GameStage extends Stage implements ContactListener{
 		for (Box b:boxes) {
 			b.draw(batch,1f);
 		}
+		for (Picks p:picks) {
+			p.draw(batch,1f);
+		}
 		batch.end();
-
+		super.draw();
+		renderer.render(world, camera.combined);
 	}
 
 	private void setupWorld () {
@@ -87,12 +92,26 @@ public class GameStage extends Stage implements ContactListener{
 		world.setContactListener(this);
 
 		boxes = new ArrayList<Box>();
-		boxes.add(new Box(world,WorldUtils.GROUND_X,WorldUtils.GROUND_Y,WorldUtils.GROUND_WIDTH,WorldUtils.GROUND_HEIGHT));
-		boxes.add(new Box(world,40,10+ WorldUtils.GROUND_Y,1,20));
-		boxes.add(new Box(world,-40,10+ WorldUtils.GROUND_Y,1,20));
-		boxes.add(new Box(world,0,3,15,2));
-		boxes.add(new Box(world,10,15,15,2));
+		picks = new ArrayList<Picks>();
+		switch (level) {
+			case 0:
+				boxes.add(new Box(world,WorldUtils.GROUND_X,WorldUtils.GROUND_Y,WorldUtils.GROUND_WIDTH,WorldUtils.GROUND_HEIGHT));
+				boxes.add(new Box(world,40,10+ WorldUtils.GROUND_Y,1,20));
+				boxes.add(new Box(world,-40,10+ WorldUtils.GROUND_Y,1,20));
+				boxes.add(new Box(world,0,3,15,2));
+				boxes.add(new Box(world,10,15,15,2));
+				break;
+			case 1:
+				newBox(35,-20,175,30);
+				newBox(-30,20,50,50);
+				newBox(35,55,175,30);
+				newBox(100,20,50,50);
+				picks.add(new Picks(world,20,-3,4));
 
+				break;
+		}
+
+/*
 		tBoxes = new Table();
 		addActor(tBoxes);
 
@@ -101,7 +120,10 @@ public class GameStage extends Stage implements ContactListener{
 			tBoxes.add(b);
 		}
 
-
+*/
+	}
+	private void newBox(float x,float y,float w, float h) {
+		boxes.add(new Box(world,x,y,w,h));
 	}
 	private void setupHero() {
 		hero = new Hero(world);
