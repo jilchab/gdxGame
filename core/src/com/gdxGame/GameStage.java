@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -36,14 +37,18 @@ public class GameStage extends Stage implements ContactListener{
 	private float accumulator = 0f;
 	private OrthographicCamera camera;
 	private Box2DDebugRenderer renderer;
+
+	Group actors;
 	List<Box> boxes;
 	List<Picks> picks;
 	Table tButtons;
-	int level;
+	Levels levels;
+	String currentLevel;
 
 	public GameStage() {
 		super();
-		level = 1;
+		actors = new Group();
+		currentLevel = "level_0";
 		setupWorld();
 		setupHero();
 		setupCamera();
@@ -70,65 +75,28 @@ public class GameStage extends Stage implements ContactListener{
 	@Override
 	public void draw() {
 
-
-
 		Batch batch = getBatch();
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		hero.draw(batch,1);
-		for (Box b:boxes) {
-			b.draw(batch,1f);
-		}
-		for (Picks p:picks) {
-			p.draw(batch,1f);
-		}
+		hero.draw(batch,1); // Draw the ball
+		actors.draw(batch,1); // Draw all actors
 		batch.end();
-		super.draw();
-		renderer.render(world, camera.combined);
+
+		super.draw(); //Draw UI (buttons,etc.)
+		renderer.render(world, camera.combined);   //
 	}
 
 	private void setupWorld () {
 		world = new World(WorldUtils.WORLD_GRAVITY, true);
 		world.setContactListener(this);
 
-		boxes = new ArrayList<Box>();
-		picks = new ArrayList<Picks>();
-		switch (level) {
-			case 0:
-				boxes.add(new Box(world,WorldUtils.GROUND_X,WorldUtils.GROUND_Y,WorldUtils.GROUND_WIDTH,WorldUtils.GROUND_HEIGHT));
-				boxes.add(new Box(world,40,10+ WorldUtils.GROUND_Y,1,20));
-				boxes.add(new Box(world,-40,10+ WorldUtils.GROUND_Y,1,20));
-				boxes.add(new Box(world,0,3,15,2));
-				boxes.add(new Box(world,10,15,15,2));
-				break;
-			case 1:
-				newBox(35,-20,175,30);
-				newBox(-30,20,50,50);
-				newBox(35,55,175,30);
-				newBox(100,20,50,50);
-				picks.add(new Picks(world,20,-3,4));
-
-				break;
-		}
-
-/*
-		tBoxes = new Table();
-		addActor(tBoxes);
-
-		for (Box b:boxes) {
-			//addActor(b);
-			tBoxes.add(b);
-		}
-
-*/
+		levels = new Levels(world);
+		actors = levels.loadActors(currentLevel);
 	}
-	private void newBox(float x,float y,float w, float h) {
-		boxes.add(new Box(world,x,y,w,h));
-	}
+
 	private void setupHero() {
 		hero = new Hero(world);
 		addActor(hero);
-		//tButtons.add(hero);
 	}
 	private void setupCamera() {
 		camera = new OrthographicCamera(WorldUtils.VIEWPORT_WIDTH, WorldUtils.VIEWPORT_HEIGHT);
@@ -189,7 +157,6 @@ public class GameStage extends Stage implements ContactListener{
 		});
 	}
 
-
 	@Override
 	public void beginContact(Contact contact) {
 		Body a = contact.getFixtureA().getBody();
@@ -203,7 +170,6 @@ public class GameStage extends Stage implements ContactListener{
 			hero.roll(hero.rollingState());
 		}
 	}
-
 	@Override
 	public void endContact(Contact contact) {
 		Body a = contact.getFixtureA().getBody();
