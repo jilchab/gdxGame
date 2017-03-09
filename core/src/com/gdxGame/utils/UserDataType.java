@@ -1,6 +1,6 @@
 package com.gdxGame.utils;
 
-
+//toto
 public enum UserDataType {
 	BOX,
 	WALL,
