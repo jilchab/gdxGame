@@ -1,4 +1,4 @@
-package com.gdxGame;
+package com.gdxGame.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,13 +8,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gdxGame.GameStage;
 
 public class GameScreen implements Screen {
 
 	private GameStage stage;
 
-	public GameScreen() {
-		stage = new GameStage();
+	public GameScreen(String level) {
+		stage = new GameStage(level);
 	}
 
 	@Override
