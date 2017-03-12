@@ -4,14 +4,12 @@ package com.gdxGame.GameActors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.gdxGame.utils.UserData;
+import com.gdxGame.GameActors.UserData.UserData;
 
 public class Hero extends GameActor {
 
@@ -19,15 +17,14 @@ public class Hero extends GameActor {
 	private boolean rollLeft,rollRight;
 	private TextureRegion textureRegion= new TextureRegion(new Texture(Gdx.files.internal("circle.png")));
 
-	public static final float DEFAULT_X = 0;
-	public static final float DEFAULT_Y = 2;
+
 	public static final float RADIUS = 2f;
-	public static final float DENSITY = 0.5f;
-	public static final Vector2 JUMPING_LINEAR_IMPULSE = new Vector2(0, 400f);
-	public static final float LINEAR_GROUND_VELOCITY = 20f;
+	public static final float DENSITY = 0.25f;
+	public static final Vector2 JUMPING_LINEAR_IMPULSE = new Vector2(0, 100f);
+	public static final float LINEAR_GROUND_VELOCITY = 25f;
 	public static final float LINEAR_AIR_VELOCITY = 15f;
-	public static final float ANGULAR_VELOCITY = 5f;
-	public static final float ANGULAR_TORQUE_BRAKE = 1500f;
+	public static final float ANGULAR_VELOCITY = 10f;
+	public static final float ANGULAR_TORQUE_BRAKE = 1000f;
 
 
 
@@ -40,7 +37,7 @@ public class Hero extends GameActor {
 		shape.setRadius(radius);
 		body.createFixture(shape, density);
 		body.resetMassData();
-		body.setUserData(new HeroUserData());
+		body.setUserData(new com.gdxGame.GameActors.UserData.HeroUserData());
 		userData = (UserData) body.getUserData();
 		shape.dispose();
 
@@ -48,8 +45,8 @@ public class Hero extends GameActor {
 		setSize(radius*2,radius*2);
 
 	}
-	public Hero(World world) {
-		this(world, DEFAULT_X, DEFAULT_Y,RADIUS,DENSITY);
+	public Hero(World world, float x, float y) {
+		this(world,x,y,RADIUS,DENSITY);
 	}
 
 	@Override
@@ -107,8 +104,8 @@ public class Hero extends GameActor {
 	}
 
 	@Override
-	public HeroUserData getUserData() {
-		return (HeroUserData) userData;
+	public com.gdxGame.GameActors.UserData.HeroUserData getUserData() {
+		return (com.gdxGame.GameActors.UserData.HeroUserData) userData;
 	}
 
 

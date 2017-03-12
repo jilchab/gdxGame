@@ -1,4 +1,4 @@
-package com.gdxGame;
+package com.gdxGame.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -7,8 +7,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.gdxGame.GameActors.Box;
 import com.gdxGame.GameActors.Picks;
-import com.gdxGame.utils.CameraInfo;
-import com.gdxGame.utils.Level;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -26,7 +24,7 @@ public class Levels {
 
 	public Level load(String levelLoaded) {
 
-		JSONObject jLevels = new JSONObject(loadJsonFile("Levels.json"));
+		JSONObject jLevels = new JSONObject(loadJsonFile("Levels/"+levelLoaded+".json"));
 		JSONArray levelArray = jLevels.getJSONArray(levelLoaded);
 		for (int i = 0; i < levelArray.length(); i++) {
 			String type = levelArray.getJSONObject(i).getString("type");
@@ -49,6 +47,9 @@ public class Levels {
 			}
 			else if(type.equals("world")) {
 				level.world.setGravity(new Vector2(x,y));
+			}
+			else if(type.equals("spawn")) {
+				level.spawn = new Vector2(x,y);
 			}
 		}
 

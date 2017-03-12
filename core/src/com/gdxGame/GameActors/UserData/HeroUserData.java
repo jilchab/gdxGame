@@ -1,7 +1,7 @@
-package com.gdxGame.GameActors;
+package com.gdxGame.GameActors.UserData;
 
 import com.badlogic.gdx.math.Vector2;
-import com.gdxGame.utils.*;
+import com.gdxGame.GameActors.Hero;
 
 public class HeroUserData extends UserData {
 

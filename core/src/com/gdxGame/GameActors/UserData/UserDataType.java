@@ -1,4 +1,4 @@
-package com.gdxGame.utils;
+package com.gdxGame.GameActors.UserData;
 
 
 public enum UserDataType {

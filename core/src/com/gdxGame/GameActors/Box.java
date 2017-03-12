@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.gdxGame.utils.UserData;
+import com.gdxGame.GameActors.UserData.UserData;
 
 
 //test git
@@ -17,10 +17,11 @@ public class Box extends DataActor{
 	World world;
 	static Texture texture = new Texture(Gdx.files.internal("bluebox.png"));
 
-	public Box(World world,float x,float y,float width,float height) {
+	public Box(World world,float left,float bottom,float right,float top) {
 		this.world=world;
 
-
+		float width = right-left, height = top-bottom;
+		float x = left + width/2f, y = bottom + height/2f;
 
 		PolygonShape hShape = new PolygonShape();
 		hShape.setAsBox(width/2, 0.05f);
@@ -34,11 +35,11 @@ public class Box extends DataActor{
 
 		bUp = world.createBody(bUpDef);
 		bUp.createFixture(hShape,0f);
-		bUp.setUserData(new GroundUserData());
+		bUp.setUserData(new com.gdxGame.GameActors.UserData.GroundUserData());
 
 		body = world.createBody(bodyDef);
 		body.createFixture(shape,0f);
-		body.setUserData(new WallUserData());
+		body.setUserData(new com.gdxGame.GameActors.UserData.WallUserData());
 
 		userData = (UserData) body.getUserData();
 		hShape.dispose();
@@ -56,8 +57,8 @@ public class Box extends DataActor{
 	}
 
 	@Override
-	public BoxUserData getUserData() {
-		return (BoxUserData) userData;
+	public com.gdxGame.GameActors.UserData.BoxUserData getUserData() {
+		return (com.gdxGame.GameActors.UserData.BoxUserData) userData;
 	}
 
 

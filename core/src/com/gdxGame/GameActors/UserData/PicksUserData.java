@@ -1,7 +1,4 @@
-package com.gdxGame.GameActors;
-
-import com.gdxGame.utils.UserData;
-import com.gdxGame.utils.UserDataType;
+package com.gdxGame.GameActors.UserData;
 
 /**
  * Created by jilchabaro on 09/03/2017.

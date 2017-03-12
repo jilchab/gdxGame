@@ -1,6 +1,4 @@
-package com.gdxGame.GameActors;
-
-import com.gdxGame.utils.*;
+package com.gdxGame.GameActors.UserData;
 
 
 public class BoxUserData extends UserData {

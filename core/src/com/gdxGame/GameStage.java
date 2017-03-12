@@ -10,8 +10,6 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -19,8 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.gdxGame.GameActors.*;
-import com.gdxGame.utils.BodyUtils;
-import com.gdxGame.utils.Level;
+import com.gdxGame.Screens.MainMenuScreen;
+import com.gdxGame.utils.*;
 
 
 public class GameStage extends Stage implements ContactListener {
@@ -33,6 +31,7 @@ public class GameStage extends Stage implements ContactListener {
 	private OrthographicCamera camera;
 	private Box2DDebugRenderer renderer;
 	private String currentLevel;
+	private GameName game;
 
 	public GameStage(String level) {
 		super();
@@ -43,7 +42,6 @@ public class GameStage extends Stage implements ContactListener {
 		setupButtons();
 		renderer = new Box2DDebugRenderer();
 	}
-
 
 	@Override
 	public void act(float delta) {
@@ -78,13 +76,14 @@ public class GameStage extends Stage implements ContactListener {
 
 	private void setupWorld() {
 
-		Levels levels = new Levels();
+		com.gdxGame.utils.Levels levels = new com.gdxGame.utils.Levels();
 		level = levels.load(currentLevel);
 		level.world.setContactListener(this);
 	}
 
 	private void setupHero() {
-		hero = new Hero(level.world);
+		hero = new Hero(level.world,level.spawn.x,level.spawn.y);
+
 		addActor(hero);
 	}
 
@@ -111,6 +110,7 @@ public class GameStage extends Stage implements ContactListener {
 		final Button bt_right = new Button(sArrowRight);
 		final Button bt_left = new Button(sArrowLeft);
 		final Button bt_up = new Button(sArrowUp);
+
 		Table tButtons = new Table();
 		addActor(tButtons);
 
@@ -119,7 +119,7 @@ public class GameStage extends Stage implements ContactListener {
 		tButtons.bottom().left();
 		tButtons.add(bt_left).width(100).height(100).pad(0, 200, 100, 100);
 		tButtons.add(bt_right).width(100).height(100).pad(0, 100, 100, 0);
-		tButtons.add(bt_up).width(100).height(100).pad(0, 0, 100, 200).expandX().right();
+		tButtons.add(bt_up).width(100).height(100).pad(0, 0, 50, 200).expandX().right();
 
 		bt_up.addListener(new ClickListener() {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -161,7 +161,10 @@ public class GameStage extends Stage implements ContactListener {
 			hero.roll(hero.rollingState());
 		} else if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsPicks(b)) ||
 				(BodyUtils.bodyIsPicks(a) && BodyUtils.bodyIsRunner(b))){
-
+			game.setScreen(new MainMenuScreen(game));
+			draw();
+			for(long  i = 0;i<100000000;i++);
+			dispose();
 		}
 
 	}
@@ -189,7 +192,10 @@ public class GameStage extends Stage implements ContactListener {
 	@Override
 	public void dispose() {
 		skin.dispose();
+		super.dispose();
 	}
-
+	public void setGame(GameName game) {
+		this.game = game;
+	}
 
 }
