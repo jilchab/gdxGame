@@ -18,10 +18,9 @@ public class Box extends DataActor{
 	static Texture texture = new Texture(Gdx.files.internal("bluebox.png"));
 
 
-	public Box(World world,float left,float bottom,float right,float top) {
+	public Box(World world,float left,float bottom,float width,float height) {
 		this.world=world;
 
-		float width = right-left, height = top-bottom;
 		float x = left + width/2f, y = bottom + height/2f;
 
 		PolygonShape hShape = new PolygonShape();

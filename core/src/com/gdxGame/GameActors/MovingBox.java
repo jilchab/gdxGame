@@ -26,11 +26,10 @@ public class MovingBox extends DataActor{
 
 
 
-	public MovingBox(World world,float left,float bottom,float right,float top,
+	public MovingBox(World world,float left, float bottom, float width,float height,
 	                 float left2, float bottom2, float speed) {
 		this.world=world;
 
-		float width = right-left, height = top-bottom;
 		float x = left + width/2f, y = bottom + height/2f;
 
 		PolygonShape hShape = new PolygonShape();

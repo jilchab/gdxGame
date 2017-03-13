@@ -168,7 +168,6 @@ public class GameStage extends Stage implements ContactListener {
 		}
 
 	}
-
 	@Override
 	public void endContact(Contact contact) {
 		Body a = contact.getFixtureA().getBody();
@@ -179,15 +178,10 @@ public class GameStage extends Stage implements ContactListener {
 			hero.setJump();
 		}
 	}
-
 	@Override
-	public void preSolve(Contact contact, Manifold oldManifold) {
-	}
-
+	public void preSolve(Contact contact, Manifold oldManifold) {}
 	@Override
-	public void postSolve(Contact contact, ContactImpulse impulse) {
-	}
-
+	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	@Override
 	public void dispose() {
 		skin.dispose();
