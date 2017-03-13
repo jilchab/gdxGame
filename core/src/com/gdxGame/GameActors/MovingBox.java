@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.gdxGame.GameActors.UserData.GroundUserData;
 import com.gdxGame.GameActors.UserData.MovingBoxUserData;
 import com.gdxGame.GameActors.UserData.UserData;
 
@@ -44,7 +45,7 @@ public class MovingBox extends DataActor{
 
 		bUp = world.createBody(bUpDef);
 		bUp.createFixture(hShape,0f);
-		bUp.setUserData(new com.gdxGame.GameActors.UserData.MovingBoxUserData());
+		bUp.setUserData(new GroundUserData());
 
 		body = world.createBody(bodyDef);
 		body.createFixture(shape,0f);
