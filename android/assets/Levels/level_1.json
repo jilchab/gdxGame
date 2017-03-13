@@ -6,7 +6,7 @@
       "y": 22.5,
       "w": 80,
       "h": 45,
-      "fixed": true
+      "fixed": false
     },
     {
       "type": "spawn",

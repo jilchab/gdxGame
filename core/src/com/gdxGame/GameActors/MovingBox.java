@@ -8,17 +8,25 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.gdxGame.GameActors.UserData.MovingBoxUserData;
 import com.gdxGame.GameActors.UserData.UserData;
 
 
 //test git
-public class Box extends DataActor{
+public class MovingBox extends DataActor{
+
 	public Body bUp,body;
 	World world;
 	static Texture texture = new Texture(Gdx.files.internal("bluebox.png"));
 
+	Vector2 pos1,pos2;
+	float speed;
+	float time = 0;
 
-	public Box(World world,float left,float bottom,float right,float top) {
+
+
+	public MovingBox(World world,float left,float bottom,float right,float top,
+	                 float left2, float bottom2, float speed) {
 		this.world=world;
 
 		float width = right-left, height = top-bottom;
@@ -30,26 +38,27 @@ public class Box extends DataActor{
 		shape.setAsBox(width/2, height/2);
 
 		BodyDef bUpDef= new BodyDef();
-		bUpDef.type = BodyDef.BodyType.KinematicBody;
 		bUpDef.position.set(new Vector2(x, y+height/2));
 		BodyDef bodyDef= new BodyDef();
-		bodyDef.type = BodyDef.BodyType.KinematicBody;
 		bodyDef.position.set(new Vector2(x, y));
 
 		bUp = world.createBody(bUpDef);
 		bUp.createFixture(hShape,0f);
-		bUp.setUserData(new com.gdxGame.GameActors.UserData.GroundUserData());
+		bUp.setUserData(new com.gdxGame.GameActors.UserData.MovingBoxUserData());
 
 		body = world.createBody(bodyDef);
 		body.createFixture(shape,0f);
 		body.setUserData(new com.gdxGame.GameActors.UserData.WallUserData());
 
-		userData = (UserData) body.getUserData();
+		userData = (UserData) bUp.getUserData();
 		hShape.dispose();
 		shape.dispose();
 
 		setPosition(x,y);
 		setSize(width,height);
+		pos1 = new Vector2(x,y);
+		pos2 = new Vector2(left2 + width/2f,bottom2 + height/2f);
+		this.speed = speed;
 
 
 	}
@@ -57,7 +66,21 @@ public class Box extends DataActor{
 	@Override
 	public void act(float delta) {
 		super.act(delta);
-
+		time += delta;
+		Vector2 pos = pos1.cpy();
+		if (time <= speed) {
+			pos.lerp(pos2, time / speed);
+		} else {
+			time = 0;
+			Vector2 pos_swap = pos2.cpy();
+			pos2 = pos1.cpy();
+			pos1 = pos_swap;
+			pos = pos1.cpy();
+		}
+		//System.out.println("pos : "+pos+"   pos1 : "+pos1+"   pos2 : "+pos2);
+		body.setTransform(pos,0);
+		pos.y+=getHeight()/2;
+		bUp.setTransform(pos,0);
 	}
 
 	@Override
@@ -67,8 +90,8 @@ public class Box extends DataActor{
 	}
 
 	@Override
-	public com.gdxGame.GameActors.UserData.BoxUserData getUserData() {
-		return (com.gdxGame.GameActors.UserData.BoxUserData) userData;
+	public MovingBoxUserData getUserData() {
+		return (MovingBoxUserData) userData;
 	}
 
 

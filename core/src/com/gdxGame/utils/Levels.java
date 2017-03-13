@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.gdxGame.GameActors.Box;
+import com.gdxGame.GameActors.MovingBox;
 import com.gdxGame.GameActors.Picks;
 
 import org.json.JSONObject;
@@ -35,6 +36,14 @@ public class Levels {
 				float h = (float)levelArray.getJSONObject(i).getDouble("h");
 				box(x,y,w,h);
 			}
+			else if(type.equals("movingbox")) {
+				float x2 = (float)levelArray.getJSONObject(i).getDouble("x2");
+				float y2 = (float)levelArray.getJSONObject(i).getDouble("y2");
+				float w = (float)levelArray.getJSONObject(i).getDouble("w");
+				float h = (float)levelArray.getJSONObject(i).getDouble("h");
+				float speed = (float)levelArray.getJSONObject(i).getDouble("speed");
+				movingbox(x,y,w,h,x2,y2,speed);
+			}
 			else if(type.equals("picks")) {
 				int nb = levelArray.getJSONObject(i).getInt("nb");
 				picks(x,y,nb);
@@ -58,6 +67,9 @@ public class Levels {
 
 	private void box(float x,float y,float w, float h) {
 		level.actors.addActor(new Box(level.world,x,y,w,h));
+	}
+	private void movingbox(float x,float y,float w, float h,float x2,float y2,float speed) {
+		level.actors.addActor(new MovingBox(level.world,x,y,w,h,x2,y2,speed));
 	}
 	private void picks(float x,float y,int nb) {
 		level.actors.addActor(new Picks(level.world,x,y,nb));

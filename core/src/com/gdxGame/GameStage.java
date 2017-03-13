@@ -79,11 +79,11 @@ public class GameStage extends Stage implements ContactListener {
 		com.gdxGame.utils.Levels levels = new com.gdxGame.utils.Levels();
 		level = levels.load(currentLevel);
 		level.world.setContactListener(this);
+		addActor(level.actors);
 	}
 
 	private void setupHero() {
 		hero = new Hero(level.world,level.spawn.x,level.spawn.y);
-
 		addActor(hero);
 	}
 
@@ -177,7 +177,6 @@ public class GameStage extends Stage implements ContactListener {
 		if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsGround(b)) ||
 				(BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsRunner(b))) {
 			hero.setJump();
-
 		}
 	}
 

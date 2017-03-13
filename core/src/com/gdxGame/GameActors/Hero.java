@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -14,17 +15,18 @@ import com.gdxGame.GameActors.UserData.UserData;
 public class Hero extends GameActor {
 
 	private boolean isJumping,isRolling;
+	private Body movingBody;
 	private boolean rollLeft,rollRight;
 	private TextureRegion textureRegion= new TextureRegion(new Texture(Gdx.files.internal("circle.png")));
 
 
 	public static final float RADIUS = 2f;
-	public static final float DENSITY = 0.25f;
-	public static final Vector2 JUMPING_LINEAR_IMPULSE = new Vector2(0, 100f);
+	public static final float DENSITY = 1f;
+	public static final Vector2 JUMPING_LINEAR_IMPULSE = new Vector2(0, 500f);
 	public static final float LINEAR_GROUND_VELOCITY = 25f;
 	public static final float LINEAR_AIR_VELOCITY = 15f;
 	public static final float ANGULAR_VELOCITY = 10f;
-	public static final float ANGULAR_TORQUE_BRAKE = 1000f;
+	public static final float ANGULAR_TORQUE_BRAKE = 5000f;
 
 
 
@@ -53,8 +55,12 @@ public class Hero extends GameActor {
 	public void act(float delta) {
 		super.act(delta);
 		if(!isJumping && !isRolling) {
-			if(body.getLinearVelocity().x > 0) body.applyTorque(ANGULAR_TORQUE_BRAKE,true);
-			else if(body.getLinearVelocity().x < 0) body.applyTorque(-ANGULAR_TORQUE_BRAKE,true);
+			if(body.getLinearVelocity().x > 0) {
+				body.applyTorque(ANGULAR_TORQUE_BRAKE,true);
+			}
+			else if(body.getLinearVelocity().x < 0) {
+				body.applyTorque(-ANGULAR_TORQUE_BRAKE,true);
+			}
 		}
 	}
 
@@ -72,6 +78,12 @@ public class Hero extends GameActor {
 	}
 	public void landed() {
 		isJumping = false;
+		if (!isRolling) {
+			if(body.getLinearVelocity().x > 0)
+				body.setLinearVelocity(5,body.getLinearVelocity().y);
+			else if(body.getLinearVelocity().x < 0)
+				body.setLinearVelocity(-5,body.getLinearVelocity().y);
+		}
 	}
 
 	public void roll(String direction) {
@@ -88,6 +100,14 @@ public class Hero extends GameActor {
 			body.setAngularVelocity(ANGULAR_VELOCITY);
 			isRolling = true;
 		} else {
+
+			if (!isJumping) {
+				if(body.getLinearVelocity().x > 0)
+					body.setLinearVelocity(5,body.getLinearVelocity().y);
+				else if(body.getLinearVelocity().x < 0)
+					body.setLinearVelocity(-5,body.getLinearVelocity().y);
+			}
+
 			rollLeft = false;
 			rollRight = false;
 			isRolling = false;
@@ -102,6 +122,7 @@ public class Hero extends GameActor {
 	public void setJump() {
 		isJumping = true;
 	}
+
 
 	@Override
 	public com.gdxGame.GameActors.UserData.HeroUserData getUserData() {

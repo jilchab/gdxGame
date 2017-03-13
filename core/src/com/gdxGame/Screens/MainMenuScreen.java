@@ -35,16 +35,17 @@ public class MainMenuScreen implements Screen {
 
 		TextButton.TextButtonStyle bs = new TextButton.TextButtonStyle();
 		bs.font = new BitmapFont();
-		bs.up = skin.getDrawable("select");
+		bs.up = skin.getDrawable("select-press");
 
 
 		final TextButton bt_0 = new TextButton("LEVEL 0",bs);
 		final TextButton bt_1 = new TextButton("LEVEL 1",bs);
 		tButtons = new Table();
 		tButtons.setFillParent(true);
-		tButtons.setDebug(true);
-		tButtons.add(bt_0).width(200).height(200);
-		tButtons.add(bt_1).width(200).height(200);
+		//ztButtons.setDebug(true);
+		tButtons.left().top();
+		tButtons.add(bt_0).width(200).height(200).pad(50);
+		tButtons.add(bt_1).width(200).height(200).pad(50);
 		stage.addActor(tButtons);
 
 

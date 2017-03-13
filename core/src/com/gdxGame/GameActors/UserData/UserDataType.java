@@ -6,5 +6,6 @@ public enum UserDataType {
 	WALL,
 	GROUND,
 	RUNNER,
-	PICKS
+	PICKS,
+	MOVINGBOX
 }
