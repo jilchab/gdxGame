@@ -1,6 +1,7 @@
 package com.gdxGame;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -10,18 +11,16 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.gdxGame.GameActors.*;
-import com.gdxGame.Screens.MainMenuScreen;
+import com.gdxGame.Screens.LevelSelection1PlayerScreen;
 import com.gdxGame.utils.*;
 
 
-public class GameStage extends Stage implements ContactListener {
+public class GameStage extends Stage implements ContactListener,InputProcessor {
 
 
 	private Level level;
@@ -121,6 +120,8 @@ public class GameStage extends Stage implements ContactListener {
 		tButtons.add(bt_right).width(100).height(100).pad(0, 100, 100, 0);
 		tButtons.add(bt_up).width(100).height(100).pad(0, 0, 50, 200).expandX().right();
 
+		/*
+
 		bt_up.addListener(new ClickListener() {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				hero.jump();
@@ -147,6 +148,7 @@ public class GameStage extends Stage implements ContactListener {
 				hero.roll("stop");
 			}
 		});
+		*/
 	}
 
 	@Override
@@ -161,7 +163,7 @@ public class GameStage extends Stage implements ContactListener {
 			hero.roll(hero.rollingState());
 		} else if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsPicks(b)) ||
 				(BodyUtils.bodyIsPicks(a) && BodyUtils.bodyIsRunner(b))){
-			game.setScreen(new MainMenuScreen(game));
+			game.setScreen(new LevelSelection1PlayerScreen(game));
 			draw();
 			for(long  i = 0;i<100000000;i++);
 			dispose();
@@ -191,4 +193,42 @@ public class GameStage extends Stage implements ContactListener {
 		this.game = game;
 	}
 
+	public String getAction(int x, int y) {
+		if(y < 750) return "null";
+		else if(x> 1500) return "jump";
+		else if(x<400) return "left";
+		else if(x<800) return "right";
+		else return "null";
+
+	}
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+		//System.out.println(screenX+" "+screenY);
+		String action = getAction(screenX,screenY);
+		if(action.equals("jump")) hero.jump();
+		else hero.roll(action);
+
+		return true;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		if(getAction(screenX,screenY).equals("left") || getAction(screenX,screenY).equals("right"))
+		hero.roll("stop");
+		return true;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+
+		String action = getAction(screenX, screenY);
+		if (    (action.equals("left") && hero.rollingState().equals("right")) ||
+				(action.equals("right") && hero.rollingState().equals("left"))) {
+
+			hero.roll("stop");
+			hero.roll(action);
+		}
+		return true;
+	}
 }
