@@ -77,6 +77,7 @@ public class MainMenuScreen implements Screen {
 	public void hide() {}
 	@Override
 	public void dispose() {
+		batch.dispose();
 		stage.dispose();
 		skin.dispose();
 	}

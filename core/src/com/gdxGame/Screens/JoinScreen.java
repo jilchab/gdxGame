@@ -2,18 +2,21 @@ package com.gdxGame.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.gdxGame.*;
+import com.gdxGame.GameName;
 
-public class HostJoinSelectionScreen implements Screen {
+
+public class JoinScreen implements Screen {
 
 	SpriteBatch batch;
 	Skin skin;
@@ -21,47 +24,35 @@ public class HostJoinSelectionScreen implements Screen {
 	Stage stage;
 	GameName gamename;
 
-	public HostJoinSelectionScreen(final GameName gamename) {
-		this.gamename = gamename;
 
-		gamename.bluetooth.turnBluetoothOn();
+	public JoinScreen(final GameName gamename) {
+		this.gamename = gamename;
 
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
-
 		batch = new SpriteBatch();
 
+		gamename.bluetooth.startDiscoverBluetooth();
+
+		Label.LabelStyle ls = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("fonts/ebb_white.fnt")),Color.WHITE);
 		final Button bt_back = new Button(gamename.bsback);
-		final TextButton bt_host = new TextButton("HOST",gamename.bs);
-		final TextButton bt_join = new TextButton("JOIN",gamename.bs);
+		Label text = new Label("Searching...", ls);
 		tButtons = new Table();
 		tButtons.setFillParent(true);
 		//tButtons.setDebug(true);
 		tButtons.top().left();
 		tButtons.add(bt_back).width(100).height(100).pad(50,50,20,0).top().left();
 		tButtons.row();
-		tButtons.add(bt_host).width(600).height(300).pad(100).expandX().center();
-		tButtons.row();
-		tButtons.add(bt_join).width(600).height(300).expandX().center();
+		tButtons.add(text).expandX().expandY().center();
+
 		stage.addActor(tButtons);
 
 
 		bt_back.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				gamename.setScreen(new MainMenuScreen(gamename));
+				gamename.setScreen(new HostJoinSelectionScreen(gamename));
 			}
 		});
-		bt_join.addListener(new ClickListener() {
-			public void clicked(InputEvent event, float x, float y) {
-				gamename.setScreen(new JoinScreen(gamename));
-			}
-		});
-		bt_host.addListener(new ClickListener() {
-			public void clicked(InputEvent event, float x, float y) {
-				gamename.setScreen(new HostScreen(gamename));
-			}
-		});
-
 	}
 
 	public void render(float delta) {
@@ -72,6 +63,10 @@ public class HostJoinSelectionScreen implements Screen {
 		//Draw
 		stage.draw();
 		stage.act(delta);
+		batch.begin();
+
+		batch.end();
+
 	}
 	@Override
 	public void show() {}

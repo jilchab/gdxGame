@@ -87,6 +87,7 @@ public class LevelSelection1PlayerScreen implements Screen {
 	public void hide() {}
 	@Override
 	public void dispose() {
+		batch.dispose();
 		stage.dispose();
 		skin.dispose();
 	}
