@@ -26,7 +26,7 @@ public class Hero extends GameActor {
 	public static final float LINEAR_GROUND_VELOCITY = 25f;
 	public static final float LINEAR_AIR_VELOCITY = 15f;
 	public static final float ANGULAR_VELOCITY = 10f;
-	public static final float ANGULAR_TORQUE_BRAKE = 5000f;
+	public static final float ANGULAR_TORQUE_BRAKE = 1000f;
 
 
 
@@ -99,7 +99,7 @@ public class Hero extends GameActor {
 			else body.setLinearVelocity(-LINEAR_AIR_VELOCITY,body.getLinearVelocity().y);
 			body.setAngularVelocity(ANGULAR_VELOCITY);
 			isRolling = true;
-		} else {
+		} else if(!direction.equals("null")){
 
 			if (!isJumping) {
 				if(body.getLinearVelocity().x > 0)

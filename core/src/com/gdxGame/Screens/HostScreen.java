@@ -64,9 +64,6 @@ public class HostScreen implements Screen {
 		//Draw
 		stage.draw();
 		stage.act(delta);
-		batch.begin();
-
-		batch.end();
 
 	}
 	@Override

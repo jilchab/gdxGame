@@ -47,13 +47,11 @@ select-press
   orig: 22, 28
   offset: 0, 0
   index: -1
-select
+pause
   rotate: false
   xy: 0, 52
-  size: 22, 28
-  split: 3, 18, 0, 28
-  pad: -1, -1, -1, -1
-  orig: 22, 28
+  size: 14, 14
+  orig: 14, 14
   offset: 0, 0
   index: -1
 up

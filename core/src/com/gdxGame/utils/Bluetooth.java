@@ -12,4 +12,5 @@ public interface Bluetooth {
 
 	boolean startDiscoverBluetooth();
 
+	public void getBondedDevice();
 }

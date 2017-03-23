@@ -33,6 +33,7 @@ public class JoinScreen implements Screen {
 		batch = new SpriteBatch();
 
 		gamename.bluetooth.startDiscoverBluetooth();
+		//gamename.bluetooth.getBondedDevice();
 
 		Label.LabelStyle ls = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("fonts/ebb_white.fnt")),Color.WHITE);
 		final Button bt_back = new Button(gamename.bsback);
@@ -63,9 +64,7 @@ public class JoinScreen implements Screen {
 		//Draw
 		stage.draw();
 		stage.act(delta);
-		batch.begin();
 
-		batch.end();
 
 	}
 	@Override

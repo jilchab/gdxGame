@@ -54,13 +54,13 @@ public class LevelSelection1PlayerScreen implements Screen {
 		});
 		bt_0.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y){
-				gamename.setScreen(new GameScreen(gamename,"level_0"));
+				gamename.setScreen(new GameScreen(gamename,0));
 			}
 
 		});
 		bt_1.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				gamename.setScreen(new GameScreen(gamename,"level_1"));
+				gamename.setScreen(new GameScreen(gamename,1));
 			}
 		});
 

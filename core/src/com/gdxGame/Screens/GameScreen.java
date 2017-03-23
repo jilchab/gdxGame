@@ -16,7 +16,7 @@ public class GameScreen implements Screen {
 	private GameStage stage;
 	GameName gamename;
 
-	public GameScreen(GameName gameName, String level) {
+	public GameScreen(GameName gameName, int level) {
 		this.gamename = gameName;
 		this.stage = new GameStage(level);
 		stage.setGame(gameName);
