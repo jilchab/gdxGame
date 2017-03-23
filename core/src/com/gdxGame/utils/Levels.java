@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.gdxGame.GameActors.Box;
-import com.gdxGame.GameActors.Door;
+import com.gdxGame.GameActors.Exit;
 import com.gdxGame.GameActors.MovingBox;
 import com.gdxGame.GameActors.Picks;
 
@@ -61,9 +61,9 @@ public class Levels {
 			else if(type.equals("spawn")) {
 				level.spawn = new Vector2(x,y);
 			}
-			else if(type.equals("door")) {
+			else if(type.equals("exit")) {
 				level.exit = new Vector2(x,y);
-				level.actors.addActor(new Door(x,y));
+				level.actors.addActor(new Exit(x,y));
 			}
 		}
 

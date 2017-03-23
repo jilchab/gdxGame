@@ -112,70 +112,6 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 		camera.update();
 	}
 
-	private void setupButtons() {
-
-		Gdx.input.setInputProcessor(this);
-		skin = new Skin();
-		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("gdx-skins-master/buttons.txt"));
-		skin.addRegions(atlas);
-		Button.ButtonStyle sArrowLeft = new Button.ButtonStyle();
-		sArrowLeft.up = skin.getDrawable("left");
-		Button.ButtonStyle sArrowRight = new Button.ButtonStyle();
-		sArrowRight.up = skin.getDrawable("right");
-		Button.ButtonStyle sArrowUp = new Button.ButtonStyle();
-		sArrowUp.up = skin.getDrawable("up");
-		Button.ButtonStyle sPause = new Button.ButtonStyle();
-		sPause.up = skin.getDrawable("pause");
-
-
-		final Button bt_right = new Button(sArrowRight);
-		final Button bt_left = new Button(sArrowLeft);
-		final Button bt_up = new Button(sArrowUp);
-		final Button bt_pause = new Button(sPause);
-
-		Table tButtons = new Table();
-		addActor(tButtons);
-
-		tButtons.setFillParent(true);
-		//tButtons.setDebug(true);
-		tButtons.top().left();
-		tButtons.add(bt_pause).width(100).height(100).pad(50, 0, 0, 0);
-		tButtons.row();
-		tButtons.add(bt_left).width(100).height(100).pad(0, 200, 100, 100).expandY().bottom().left();
-		tButtons.add(bt_right).width(100).height(100).pad(0, 100, 100, 0).expandY().bottom().left();
-		tButtons.add(bt_up).width(100).height(100).pad(0, 0, 50, 200).expandX().bottom().right();
-
-		/*
-		{
-		bt_up.addListener(new ClickListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				hero.jump();
-				return true;
-			}
-		});
-		bt_left.addListener(new ClickListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				hero.roll("left");
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				hero.roll("stop");
-			}
-		});
-		bt_right.addListener(new ClickListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				hero.roll("right");
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				hero.roll("stop");
-			}
-		});
-		*/
-	}
-
 	public void pause() {
 		if(TIME_STEP == 0)  {
 			TIME_STEP = 1f/60f;
@@ -275,7 +211,6 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 		hero.roll("stop");
 		return true;
 	}
-
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 
@@ -287,5 +222,68 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 			hero.roll(action);
 		}
 		return true;
+	}
+	private void setupButtons() {
+
+		Gdx.input.setInputProcessor(this);
+		skin = new Skin();
+		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("gdx-skins-master/buttons.txt"));
+		skin.addRegions(atlas);
+		Button.ButtonStyle sArrowLeft = new Button.ButtonStyle();
+		sArrowLeft.up = skin.getDrawable("left");
+		Button.ButtonStyle sArrowRight = new Button.ButtonStyle();
+		sArrowRight.up = skin.getDrawable("right");
+		Button.ButtonStyle sArrowUp = new Button.ButtonStyle();
+		sArrowUp.up = skin.getDrawable("up");
+		Button.ButtonStyle sPause = new Button.ButtonStyle();
+		sPause.up = skin.getDrawable("pause");
+
+
+		final Button bt_right = new Button(sArrowRight);
+		final Button bt_left = new Button(sArrowLeft);
+		final Button bt_up = new Button(sArrowUp);
+		final Button bt_pause = new Button(sPause);
+
+		Table tButtons = new Table();
+		addActor(tButtons);
+
+		tButtons.setFillParent(true);
+		//tButtons.setDebug(true);
+		tButtons.top().left();
+		tButtons.add(bt_pause).width(100).height(100).pad(50, 0, 0, 0);
+		tButtons.row();
+		tButtons.add(bt_left).width(100).height(100).pad(0, 200, 100, 100).expandY().bottom().left();
+		tButtons.add(bt_right).width(100).height(100).pad(0, 100, 100, 0).expandY().bottom().left();
+		tButtons.add(bt_up).width(100).height(100).pad(0, 0, 50, 200).expandX().bottom().right();
+
+		/*
+		{
+		bt_up.addListener(new ClickListener() {
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				hero.jump();
+				return true;
+			}
+		});
+		bt_left.addListener(new ClickListener() {
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				hero.roll("left");
+				return true;
+			}
+
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				hero.roll("stop");
+			}
+		});
+		bt_right.addListener(new ClickListener() {
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				hero.roll("right");
+				return true;
+			}
+
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				hero.roll("stop");
+			}
+		});
+		*/
 	}
 }

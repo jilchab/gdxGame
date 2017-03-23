@@ -9,12 +9,12 @@ import com.gdxGame.GameActors.UserData.UserData;
 
 
 
-public class Door extends Image {
+public class Exit extends Image {
 
 	public final float DOOR_WIDTH = 4;
 	public final float DOOR_HEIGHT = 8;
 
-	public Door(float x, float y) {
+	public Exit(float x, float y) {
 		super(new TextureRegion(new Texture(Gdx.files.internal("door.png"))));
 		setPosition(x,y);
 		setSize(DOOR_WIDTH,DOOR_HEIGHT);
