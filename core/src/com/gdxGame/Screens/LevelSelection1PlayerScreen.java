@@ -36,6 +36,7 @@ public class LevelSelection1PlayerScreen implements Screen {
 		final Button bt_back = new Button(gamename.bsback);
 		final TextButton bt_0 = new TextButton(" 0",gamename.bs);
 		final TextButton bt_1 = new TextButton(" 1",gamename.bs);
+		final TextButton bt_2 = new TextButton(" 2",gamename.bs);
 		tButtons = new Table();
 		tButtons.setFillParent(true);
 		//tButtons.setDebug(true);
@@ -44,6 +45,7 @@ public class LevelSelection1PlayerScreen implements Screen {
 		tButtons.row();
 		tButtons.add(bt_0).width(200).height(200).pad(50);
 		tButtons.add(bt_1).width(200).height(200).pad(50);
+		tButtons.add(bt_2).width(200).height(200).pad(50);
 		stage.addActor(tButtons);
 
 
@@ -61,6 +63,11 @@ public class LevelSelection1PlayerScreen implements Screen {
 		bt_1.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				gamename.setScreen(new GameScreen(gamename,1));
+			}
+		});
+		bt_2.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				gamename.setScreen(new GameScreen(gamename, 2));
 			}
 		});
 

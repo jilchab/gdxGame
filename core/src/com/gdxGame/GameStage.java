@@ -57,12 +57,14 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 	public void act(float delta) {
 		if (TIME_STEP >0) super.act(delta);
 
-		if ( !level.camInfo.fixed) {
+		if ( !level.camInfo.fixed && !isWin) {
 			camera.position.set(hero.getX(), hero.getY(), 0f);
 			camera.update();
 		}
+		winMenu.setPosition(camera.position.x-winMenu.getWidth()/20,camera.position.y-winMenu.getHeight()/20);
+		pauseMenu.setPosition(camera.position.x-pauseMenu.getWidth()/20,camera.position.y-pauseMenu.getHeight()/20);
 
-		if(hero.getX() > level.exit.x + 1 && hero.getX() < level.exit.x + 3
+		if(hero.getX() > level.exit.x + 1 && hero.getX() < level.exit.x + 3         //Found Exit
 		&& hero.getY() > level.exit.y + 1 && hero.getY() < level.exit.y + 3) {
 			win();
 		}
@@ -78,14 +80,8 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 		batch.begin();
 		level.actors.draw(batch, 1); // Draw all actors
 		if(!isWin)  hero.draw(batch, 1); // Draw the ball
-		else {
-
-			winMenu.draw(batch,1f);
-		}
-		if(isPause && !isWin) {
-			pauseMenu.setPosition(hero.getX()-pauseMenu.getWidth()/20,hero.getY()-pauseMenu.getHeight()/20);
-			pauseMenu.draw(batch,1f);
-		}
+		else winMenu.draw(batch,1f);
+		if(isPause && !isWin) pauseMenu.draw(batch,1f);
 
 		batch.end();
 
@@ -124,7 +120,7 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 
 	}
 	public void win() {
-		winMenu.setPosition(hero.getX()-pauseMenu.getWidth()/20,hero.getY()-pauseMenu.getHeight()/20);
+		hero.remove();
 		isWin = true;
 	}
 
@@ -196,7 +192,7 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-		System.out.println(screenX+" "+screenY);
+		//System.out.println(screenX+" "+screenY);
 		String action = getTouchAction(screenX,screenY);
 		if(action.equals("pause")) pause();
 		else if(action.equals("jump")) hero.jump();
