@@ -38,6 +38,7 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 	private boolean isPause = false,isWin = false;
 	private Image pauseMenu = new Image(new Texture(Gdx.files.internal("pause.png"))),
 	winMenu = new Image(new Texture(Gdx.files.internal("win.png")));
+	private float srX,srY;
 
 
 	public GameStage(int level) {
@@ -51,16 +52,22 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 		setupCamera();
 		setupButtons();
 		renderer = new Box2DDebugRenderer();
+		srX = getViewport().getScreenWidth() / 1920f;
+		srY = getViewport().getScreenHeight() / 1080f;
 	}
 
 	@Override
 	public void act(float delta) {
 		if (TIME_STEP >0) super.act(delta);
 
+
+		System.out.println(getViewport().getScreenHeight() + " "+getViewport().getScreenHeight() / 1080f+" "+srY);
+
 		if ( !level.camInfo.fixed && !isWin) {
 			camera.position.set(hero.getX(), hero.getY(), 0f);
 			camera.update();
 		}
+
 		winMenu.setPosition(camera.position.x-winMenu.getWidth()/20,camera.position.y-winMenu.getHeight()/20);
 		pauseMenu.setPosition(camera.position.x-pauseMenu.getWidth()/20,camera.position.y-pauseMenu.getHeight()/20);
 
@@ -82,6 +89,7 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 		if(!isWin)  hero.draw(batch, 1); // Draw the ball
 		else winMenu.draw(batch,1f);
 		if(isPause && !isWin) pauseMenu.draw(batch,1f);
+
 
 		batch.end();
 
@@ -167,22 +175,24 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 	}
 
 	public String getTouchAction(int x, int y) {
+		
 		if(isPause) {
-			if (x > 1050 && y > 600 && x < 1450 && y < 800)
+			if (x > 1050*srX && y > 600*srY && x < 1450*srX && y < 800*srY)
 				return "pause";
-			else if (x > 500 && y > 600 && x < 900 && y < 800)
+			else if (x > 500*srX && y > 600*srY && x < 900*srX && y < 800*srY)
 				game.setScreen(new LevelSelection1PlayerScreen(game));
 		} else if(isWin) {
-			if (x>1050 && y>650 && x<1450 && y<800)
+			if (x>1050*srX && y>650*srY && x<1450*srX && y<800*srY)
 				game.setScreen(new GameScreen(game,currentLevel+1));
-			else if(x>500 && y>650 && x<900 && y<800)
+			else if(x>500*srX && y>650*srY && x<900*srX && y<800*srY)
 				game.setScreen(new LevelSelection1PlayerScreen(game));
 		} else {
-			if (y > 750) {
-				if (x > 1500) return "jump";
-				else if (x < 400) return "left";
-				else if (x < 800) return "right";
-			} else if (y < 330 && x < 330) {
+			if (y > (int)(750f*srY)) {
+				System.out.println((int)(750f*srY)+"  "+y);
+				if (x > 1500*srX) return "jump";
+				else if (x < 400*srX) return "left";
+				else if (x < 800*srX) return "right";
+			} else if (y < 330*srY && x < 330*srX) {
 				return "pause";
 			}
 		}
@@ -192,7 +202,7 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-		//System.out.println(screenX+" "+screenY);
+		System.out.println(screenX+" "+screenY);
 		String action = getTouchAction(screenX,screenY);
 		if(action.equals("pause")) pause();
 		else if(action.equals("jump")) hero.jump();
