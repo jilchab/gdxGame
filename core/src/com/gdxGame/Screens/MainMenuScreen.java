@@ -37,8 +37,12 @@ public class MainMenuScreen implements Screen {
 		tButtons.setFillParent(true);
 		//tButtons.setDebug(true);
 		tButtons.center();
-		tButtons.add(bt_1p).width(600).height(300).pad(100);
-		tButtons.add(bt_2p).width(600).height(300).pad(100);
+		float btWidth = (600)*stage.getViewport().getScreenWidth()/1920;
+		float btHeight = (300)*stage.getViewport().getScreenHeight()/1080;
+		float pad = 100*stage.getViewport().getScreenHeight()/1080;
+		System.out.println(btWidth+" "+btHeight);
+		tButtons.add(bt_1p).width(btWidth).height(btHeight).pad(pad);
+		tButtons.add(bt_2p).width(btWidth).height(btHeight).pad(pad);
 		stage.addActor(tButtons);
 
 
@@ -68,7 +72,11 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void show() {}
 	@Override
-	public void resize(int width, int height) {}
+	public void resize(int width, int height) {
+
+
+
+	}
 	@Override
 	public void pause() {}
 	@Override

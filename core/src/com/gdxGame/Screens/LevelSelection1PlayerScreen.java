@@ -37,15 +37,21 @@ public class LevelSelection1PlayerScreen implements Screen {
 		final TextButton bt_0 = new TextButton(" 0",gamename.bs);
 		final TextButton bt_1 = new TextButton(" 1",gamename.bs);
 		final TextButton bt_2 = new TextButton(" 2",gamename.bs);
+
+		float baWidth = (100)*stage.getViewport().getScreenWidth()/1920;
+		float baHeight = (100)*stage.getViewport().getScreenHeight()/1080;
+		float btWidth = (200)*stage.getViewport().getScreenWidth()/1920;
+		float btHeight = (200)*stage.getViewport().getScreenHeight()/1080;
+		float pad = 50*stage.getViewport().getScreenHeight()/1080;
 		tButtons = new Table();
 		tButtons.setFillParent(true);
 		//tButtons.setDebug(true);
 		tButtons.left().top();
-		tButtons.add(bt_back).width(100).height(100).pad(50,50,20,0).top().left();
+		tButtons.add(bt_back).width(baWidth).height(baHeight).pad(pad,pad,20,0).top().left();
 		tButtons.row();
-		tButtons.add(bt_0).width(200).height(200).pad(50);
-		tButtons.add(bt_1).width(200).height(200).pad(50);
-		tButtons.add(bt_2).width(200).height(200).pad(50);
+		tButtons.add(bt_0).width(btWidth).height(btHeight).pad(pad);
+		tButtons.add(bt_1).width(btWidth).height(btHeight).pad(pad);
+		tButtons.add(bt_2).width(btWidth).height(btHeight).pad(pad);
 		stage.addActor(tButtons);
 
 

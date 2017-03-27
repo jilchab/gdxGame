@@ -60,9 +60,6 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 	public void act(float delta) {
 		if (TIME_STEP >0) super.act(delta);
 
-
-		System.out.println(getViewport().getScreenHeight() + " "+getViewport().getScreenHeight() / 1080f+" "+srY);
-
 		if ( !level.camInfo.fixed && !isWin) {
 			camera.position.set(hero.getX(), hero.getY(), 0f);
 			camera.update();
@@ -188,7 +185,7 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 				game.setScreen(new LevelSelection1PlayerScreen(game));
 		} else {
 			if (y > (int)(750f*srY)) {
-				System.out.println((int)(750f*srY)+"  "+y);
+				//System.out.println((int)(750f*srY)+"  "+y);
 				if (x > 1500*srX) return "jump";
 				else if (x < 400*srX) return "left";
 				else if (x < 800*srX) return "right";
@@ -202,7 +199,7 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-		System.out.println(screenX+" "+screenY);
+		//System.out.println(screenX+" "+screenY);
 		String action = getTouchAction(screenX,screenY);
 		if(action.equals("pause")) pause();
 		else if(action.equals("jump")) hero.jump();
@@ -253,14 +250,19 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 		Table tButtons = new Table();
 		addActor(tButtons);
 
+		float x100 =100*getViewport().getScreenWidth()/1920;
+		float y100 =100*getViewport().getScreenHeight()/1080;
+		float x200 =200*getViewport().getScreenWidth()/1920;
+		float y50 = 50*getViewport().getScreenHeight()/1080;;
+
 		tButtons.setFillParent(true);
 		//tButtons.setDebug(true);
 		tButtons.top().left();
-		tButtons.add(bt_pause).width(100).height(100).pad(50, 0, 0, 0);
+		tButtons.add(bt_pause).width(x100).height(y100).pad(y50, 0, 0, 0);
 		tButtons.row();
-		tButtons.add(bt_left).width(100).height(100).pad(0, 200, 100, 100).expandY().bottom().left();
-		tButtons.add(bt_right).width(100).height(100).pad(0, 100, 100, 0).expandY().bottom().left();
-		tButtons.add(bt_up).width(100).height(100).pad(0, 0, 50, 200).expandX().bottom().right();
+		tButtons.add(bt_left).width(x100).height(y100).pad(0, x200, y100, x100).expandY().bottom().left();
+		tButtons.add(bt_right).width(x100).height(y100).pad(0, x100, y100, 0).expandY().bottom().left();
+		tButtons.add(bt_up).width(x100).height(y100).pad(0, 0, y50, x200).expandX().bottom().right();
 
 		/*
 		{
