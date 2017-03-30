@@ -11,9 +11,10 @@
     },
     {
       "type": "spawn",
-      "x": 4,
-      "y": 7
+      "x": 5,
+      "y": 54
     },
+    //en bas
     {
       "type": "box",
       "x": -50,
@@ -21,29 +22,37 @@
       "w": 180,
       "h": 30
     },
+    //a gauche
     {
       "type": "box",
       "x": -50,
       "y": 0,
       "w": 50,
-      "h": 45
+      "h": 100
     },
+    //en haut
     {
       "type": "box",
       "x": -50,
-      "y": 45,
+      "y": 100,
       "w": 180,
       "h": 30
     },
+    // a droite
     {
       "type": "box",
       "x": 80,
       "y": 0,
       "w": 50,
-      "h": 45
+      "h": 100
     },
 
-
+    //porte
+    {
+      "type": "exit",
+      "x" : 2,
+      "y" : 3
+    },
     {
       "type": "box",
       "x": 0,
@@ -103,12 +112,12 @@
       "w": 30,
       "h": 5
     },
-	//2pics
+	//3pics
     {
       "type": "picks",
-      "x": 14,
+      "x": 11,
       "y": 35,
-      "nb": 2
+      "nb": 3
     },
 	//bosse etoile
     {
@@ -116,29 +125,67 @@
       "x": 20,
       "y": 35,
       "w": 10,
-      "h": 5
+      "h": 3
     },
-	//
+	//box a gauche des pics
     {
       "type": "box",
       "x": 40,
-      "y": 26,
+      "y": 28,
       "w": 10,
-      "h": 4
+      "h": 3
     },
 	//petit trait avec piques
     {
       "type": "box",
       "x": 50,
       "y": 28,
-      "w": 10,
+      "w": 14,
       "h": 1
     },
     {
       "type": "picks",
-      "x": 50,
+      "x": 51,
       "y": 29,
       "nb": 4
+    },
+    //bloc apres les pics
+    {
+      "type": "box",
+      "x": 64,
+      "y": 28,
+      "w": 25,
+      "h": 4
+    },
+    //Petit bloc avec pics fin 3eme ligne H
+    {
+      "type": "picks",
+      "x": 73,
+      "y": 32,
+      "nb": 2
+    },
+    //4eme ligne horitontale gauche o spawn
+    {
+      "type": "box",
+      "x": 0,
+      "y": 48,
+      "w": 30,
+      "h": 4
+    },
+    //picks
+    {
+      "type": "picks",
+      "x": 31,
+      "y": 48,
+      "nb": 4
+    },
+    //4eme ligne apres pics
+    {
+      "type": "box",
+      "x": 44,
+      "y": 48,
+      "w": 20,
+      "h": 4
     }
   ]
 }
