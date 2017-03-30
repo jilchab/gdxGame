@@ -38,11 +38,14 @@ public class HostScreen implements Screen {
 		Label.LabelStyle ls = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("fonts/ebb_white.fnt")),Color.WHITE);
 		final Button bt_back = new Button(gamename.bsback);
 		Label text = new Label("Waiting player 2", ls);
+		float baWidth = (100)*stage.getViewport().getScreenWidth()/1920;
+		float baHeight = (100)*stage.getViewport().getScreenHeight()/1080;
+		float pad = 50*stage.getViewport().getScreenHeight()/1080;
 		tButtons = new Table();
 		tButtons.setFillParent(true);
 		//tButtons.setDebug(true);
 		tButtons.top().left();
-		tButtons.add(bt_back).width(100).height(100).pad(50,50,20,0).top().left();
+		tButtons.add(bt_back).width(baWidth).height(baHeight).pad(pad,pad,20,0).top().left();
 		tButtons.row();
 		tButtons.add(text).expandX().expandY().center();
 

@@ -67,7 +67,9 @@ public class Hero extends GameActor {
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch,parentAlpha);
-		batch.draw(textureRegion,body.getPosition().x-getWidth()/2,body.getPosition().y-getHeight()/2,getWidth(),getHeight());
+
+		batch.draw(textureRegion,(body.getPosition().x-getWidth()/2),
+				(body.getPosition().y-getHeight()/2),getWidth(),getHeight());
 	}
 
 	public void jump() {
@@ -130,4 +132,9 @@ public class Hero extends GameActor {
 	}
 
 
+
+	public void setPos(float x, float y) {
+		super.setPosition(x,y);
+		body.setTransform(new Vector2(x,y),0);
+	}
 }

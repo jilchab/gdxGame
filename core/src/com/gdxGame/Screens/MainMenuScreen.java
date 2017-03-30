@@ -37,7 +37,7 @@ public class MainMenuScreen implements Screen {
 		tButtons.setFillParent(true);
 		//tButtons.setDebug(true);
 		tButtons.center();
-		float btWidth = (600)*stage.getViewport().getScreenWidth()/1920;
+		float btWidth = (700)*stage.getViewport().getScreenWidth()/1920;
 		float btHeight = (300)*stage.getViewport().getScreenHeight()/1080;
 		float pad = 100*stage.getViewport().getScreenHeight()/1080;
 		System.out.println(btWidth+" "+btHeight);

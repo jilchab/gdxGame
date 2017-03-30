@@ -34,15 +34,21 @@ public class HostJoinSelectionScreen implements Screen {
 		final Button bt_back = new Button(gamename.bsback);
 		final TextButton bt_host = new TextButton("HOST",gamename.bs);
 		final TextButton bt_join = new TextButton("JOIN",gamename.bs);
+		float x100 = (100)*stage.getViewport().getScreenWidth()/1920;
+		float y100 = (100)*stage.getViewport().getScreenHeight()/1080;
+		float x600 = (600)*stage.getViewport().getScreenWidth()/1920;
+		float y300 = (300)*stage.getViewport().getScreenHeight()/1080;
+		float x50 = (50)*stage.getViewport().getScreenWidth()/1920;
+		float y50 = (50)*stage.getViewport().getScreenHeight()/1080;
 		tButtons = new Table();
 		tButtons.setFillParent(true);
 		//tButtons.setDebug(true);
 		tButtons.top().left();
-		tButtons.add(bt_back).width(100).height(100).pad(50,50,20,0).top().left();
+		tButtons.add(bt_back).width(x100).height(y100).pad(y50,x50,20,0).top().left();
 		tButtons.row();
-		tButtons.add(bt_host).width(600).height(300).pad(100).expandX().center();
+		tButtons.add(bt_host).width(x600).height(y300).pad(x100).expandX().center();
 		tButtons.row();
-		tButtons.add(bt_join).width(600).height(300).expandX().center();
+		tButtons.add(bt_join).width(x600).height(y300).expandX().center();
 		stage.addActor(tButtons);
 
 

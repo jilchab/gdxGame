@@ -90,8 +90,12 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 
 		batch.end();
 
+
+
+		//getBatch().setProjectionMatrix(camera.combined);
+
 		if(!isPause && !isWin)    super.draw(); //Draw UI (buttons,etc.)
-		//renderer.render(world, camera.combined);   //Debug collision
+		//renderer.render(level.world, camera.combined);   //Debug collision
 	}
 
 	private void setupWorld() {
@@ -99,11 +103,14 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 		com.gdxGame.utils.Levels levels = new com.gdxGame.utils.Levels();
 		level = levels.load(sCurrentLevel);
 		level.world.setContactListener(this);
+		level.actors.setVisible(false);
 		addActor(level.actors);
 	}
 
 	private void setupHero() {
-		hero = new Hero(level.world,level.spawn.x,level.spawn.y);
+		hero = new Hero(level
+				.world,level.spawn.x,level.spawn.y);
+		hero.setVisible(false);
 		addActor(hero);
 	}
 
@@ -141,10 +148,9 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 			hero.roll(hero.rollingState());
 		} else if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsPicks(b)) ||
 				(BodyUtils.bodyIsPicks(a) && BodyUtils.bodyIsRunner(b))){
-			draw();
-			for(long  i = 0;i<100000000;i++);
+			restart();
 			dispose();
-			game.setScreen(new LevelSelection1PlayerScreen(game));
+			game.setScreen(new GameScreen(game,currentLevel));
 		}
 
 	}
@@ -208,6 +214,10 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 		return true;
 	}
 
+	public void restart() {
+		hero.setPos(level.spawn.x,level.spawn.y);
+	}
+
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if(getTouchAction(screenX,screenY).equals("left") || getTouchAction(screenX,screenY).equals("right"))
@@ -250,10 +260,11 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 		Table tButtons = new Table();
 		addActor(tButtons);
 
+		// Adaptation for different resolutions
 		float x100 =100*getViewport().getScreenWidth()/1920;
 		float y100 =100*getViewport().getScreenHeight()/1080;
 		float x200 =200*getViewport().getScreenWidth()/1920;
-		float y50 = 50*getViewport().getScreenHeight()/1080;;
+		float y50 = 50*getViewport().getScreenHeight()/1080;
 
 		tButtons.setFillParent(true);
 		//tButtons.setDebug(true);
