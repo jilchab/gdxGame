@@ -185,8 +185,13 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 			else if (x > 500*srX && y > 600*srY && x < 900*srX && y < 800*srY)
 				game.setScreen(new LevelSelection1PlayerScreen(game));
 		} else if(isWin) {
-			if (x>1050*srX && y>650*srY && x<1450*srX && y<800*srY)
-				game.setScreen(new GameScreen(game,currentLevel+1));
+			if (x>1050*srX && y>650*srY && x<1450*srX && y<800*srY) {
+				if(currentLevel < Levels.LAST_LEVEL)
+					game.setScreen(new GameScreen(game,currentLevel+1));
+				else
+					game.setScreen(new LevelSelection1PlayerScreen(game));
+			}
+
 			else if(x>500*srX && y>650*srY && x<900*srX && y<800*srY)
 				game.setScreen(new LevelSelection1PlayerScreen(game));
 		} else {

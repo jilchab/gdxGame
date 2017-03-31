@@ -34,10 +34,10 @@ public class LevelSelection1PlayerScreen implements Screen {
 
 
 		final Button bt_back = new Button(gamename.bsback);
-		final TextButton bt_0 = new TextButton(" 0",gamename.bs);
 		final TextButton bt_1 = new TextButton(" 1",gamename.bs);
 		final TextButton bt_2 = new TextButton(" 2",gamename.bs);
 		final TextButton bt_3 = new TextButton(" 3",gamename.bs);
+		final TextButton bt_4 = new TextButton(" 4",gamename.bs);
 
 		float baWidth = (100)*stage.getViewport().getScreenWidth()/1920;
 		float baHeight = (100)*stage.getViewport().getScreenHeight()/1080;
@@ -50,10 +50,10 @@ public class LevelSelection1PlayerScreen implements Screen {
 		tButtons.left().top();
 		tButtons.add(bt_back).width(baWidth).height(baHeight).pad(pad,pad,20,0).top().left();
 		tButtons.row();
-		tButtons.add(bt_0).width(btWidth).height(btHeight).pad(pad);
 		tButtons.add(bt_1).width(btWidth).height(btHeight).pad(pad);
 		tButtons.add(bt_2).width(btWidth).height(btHeight).pad(pad);
 		tButtons.add(bt_3).width(btWidth).height(btHeight).pad(pad);
+		tButtons.add(bt_4).width(btWidth).height(btHeight).pad(pad);
 		stage.addActor(tButtons);
 
 
@@ -62,25 +62,25 @@ public class LevelSelection1PlayerScreen implements Screen {
 				gamename.setScreen(new MainMenuScreen(gamename));
 			}
 		});
-		bt_0.addListener(new ClickListener() {
+		bt_1.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y){
-				gamename.setScreen(new GameScreen(gamename,0));
+				gamename.setScreen(new GameScreen(gamename,1));
 			}
 
 		});
-		bt_1.addListener(new ClickListener() {
-			public void clicked(InputEvent event, float x, float y) {
-				gamename.setScreen(new GameScreen(gamename,1));
-			}
-		});
 		bt_2.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				gamename.setScreen(new GameScreen(gamename, 2));
+				gamename.setScreen(new GameScreen(gamename,2));
 			}
 		});
 		bt_3.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				gamename.setScreen(new GameScreen(gamename, 3));
+			}
+		});
+		bt_4.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				gamename.setScreen(new GameScreen(gamename, 4));
 			}
 		});
 

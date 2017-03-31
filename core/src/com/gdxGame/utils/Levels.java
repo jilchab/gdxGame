@@ -19,6 +19,7 @@ import java.io.IOException;
 public class Levels {
 
 	Level level;
+	public static final int LAST_LEVEL = 4;
 
 	public Levels(){
 		level = new Level(new World(new Vector2(0,-98.1f),true),new Group(),new CameraInfo(0,0));

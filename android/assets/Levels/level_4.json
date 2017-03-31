@@ -1,0 +1,268 @@
+
+{
+  "level_4": [
+    {
+      "type": "camera",
+      "x": 40,
+      "y": 22.5,
+      "w": 80,
+      "h": 45,
+      "fixed": false
+    },
+    {
+      "type": "spawn",
+      "x": 93,
+      "y": 6
+    },
+    //en bas
+    {
+      "type": "box",
+      "x": -50,
+      "y": -30,
+      "w": 200,
+      "h": 30
+    },
+    //a gauche
+    {
+      "type": "box",
+      "x": -50,
+      "y": 0,
+      "w": 50,
+      "h": 100
+    },
+    //en haut
+    {
+      "type": "box",
+      "x": -50,
+      "y": 100,
+      "w": 200,
+      "h": 30
+    },
+    // a droite
+    {
+      "type": "box",
+      "x": 102,
+      "y": 0,
+      "w": 50,
+      "h": 100
+    },
+
+    //le jeuuuuuuuuuuuuuuuu
+    //en bas a gauche
+    {
+      "type": "box",
+      "x": 0,
+      "y": 0,
+      "w": 20,
+      "h": 3
+    },
+	//les pics en bas a gauche
+	{
+      "type": "picks",
+      "x": 21,
+      "y": 0,
+      "nb": 4
+    },
+    //en bas milieu gauche
+    {
+      "type": "box",
+      "x": 34,
+      "y": 0,
+      "w": 15,
+      "h": 3
+    },
+    //les pics en bas 2
+    {
+      "type": "picks",
+      "x": 50,
+      "y": 0,
+      "nb": 4
+    },
+    //en bas milieu droit
+    {
+      "type": "box",
+      "x": 63,
+      "y": 0,
+      "w": 15,
+      "h": 3
+    },
+    //les pics en bas 3 a droite
+    {
+      "type": "picks",
+      "x": 78,
+      "y": 0,
+      "nb": 3
+    },
+    //en bas a droite
+    {
+      "type": "box",
+      "x": 87,
+      "y": 0,
+      "w": 15,
+      "h": 3
+    },
+    //1ere movingbox a gauche
+    {
+      "type": "movingbox",
+      "x":0,
+      "y":8,
+      "x2":0,
+      "y2":15,
+      "w":7,
+      "h":1,
+      "speed": 3
+    },
+    //2eme ligne gauche
+    {
+      "type": "box",
+      "x": 14,
+      "y": 15,
+      "w": 7,
+      "h": 3
+    },
+    //2eme ligne milieu gauche
+    {
+      "type": "box",
+      "x": 34,
+      "y": 15,
+      "w": 15,
+      "h": 3
+    },
+    //2eme ligne milieu droit
+    {
+      "type": "box",
+      "x": 63,
+      "y": 15,
+      "w": 15,
+      "h": 3
+    },
+    //2eme movingbox a droite
+    {
+      "type": "movingbox",
+      "x":78,
+      "y":17,
+      "x2":90,
+      "y2":17,
+      "w":8,
+      "h":1,
+      "speed": 2
+    },
+    //plateforme montée 1
+    {
+      "type": "box",
+      "x": 95,
+      "y": 24,
+      "w": 7,
+      "h": 1
+    },
+    //3eme ligne
+    {
+      "type": "box",
+      "x": 0,
+      "y": 30,
+      "w": 90,
+      "h": 3
+    },
+    //plateforme montée 2
+    {
+      "type": "box",
+      "x": 95,
+      "y": 41,
+      "w": 7,
+      "h": 1
+    },
+    //4eme ligne droite
+    {
+      "type": "box",
+      "x": 63,
+      "y": 52,
+      "w": 40,
+      "h": 3
+    },
+    //pics 4eme ligne
+    {
+      "type": "picks",
+      "x": 63,
+      "y": 55,
+      "nb": 12
+    },
+    //3eme movingbox 3eme ligne entre picks
+    {
+      "type": "movingbox",
+      "x":58,
+      "y":41,
+      "x2":87,
+      "y2":41,
+      "w":8,
+      "h":1,
+      "speed": 3
+    },
+    //colomne
+    {
+      "type": "box",
+      "x": 48,
+      "y": 33,
+      "w": 3,
+      "h": 20
+    },
+    //pics 3 eme ligne en bas
+    {
+      "type": "picks",
+      "x": 52,
+      "y": 33,
+      "nb": 9
+    },
+    //4 eme movingbox haut bas
+    {
+      "type": "movingbox",
+      "x":51,
+      "y":37,
+      "x2":51,
+      "y2":52,
+      "w":7,
+      "h":1,
+      "speed": 3
+    },
+    //plateforme en haut de la colomne
+    {
+      "type": "box",
+      "x": 37,
+      "y": 50,
+      "w": 14,
+      "h": 3
+    },
+    //3eme movingbox 3eme ligne entre picks
+    {
+      "type": "movingbox",
+      "x":0,
+      "y":41,
+      "x2":37,
+      "y2":41,
+      "w":8,
+      "h":1,
+      "speed": 3
+    },
+    //pics a coté de la porte
+    {
+      "type": "picks",
+      "x": 0,
+      "y": 33,
+      "nb": 12
+    },
+    //porte
+    {
+      "type": "exit",
+      "x" : 42,
+      "y" : 33
+    },
+    //colomne porte
+    {
+      "type": "box",
+      "x": 37,
+      "y": 33,
+      "w": 3,
+      "h": 7
+    }
+
+  ]
+}

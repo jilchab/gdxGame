@@ -1,0 +1,214 @@
+{
+  "level_3": [
+    {
+      "type": "camera",
+      "x": 40,
+      "y": 22.5,
+      "w": 80,
+      "h": 45,
+      "fixed": false
+    },
+    {
+      "type": "spawn",
+      "x": 4,
+      "y": 7
+    },
+    //en bas
+    {
+      "type": "box",
+      "x": -50,
+      "y": -30,
+      "w": 220,
+      "h": 30
+    },
+    //a gauche
+    {
+      "type": "box",
+      "x": -50,
+      "y": 0,
+      "w": 50,
+      "h": 100
+    },
+    //en haut width +40
+    {
+      "type": "box",
+      "x": -50,
+      "y": 100,
+      "w": 2200,
+      "h": 30
+    },
+    //a droite avant 80 +40
+    {
+      "type": "box",
+      "x": 120,
+      "y": 0,
+      "w": 50,
+      "h": 100
+    },
+
+    //ligne horizontale 1 en bas
+    {
+      "type": "box",
+      "x": 0,
+      "y": 0,
+      "w": 120,
+      "h": 3
+    },
+    //colomne gauche
+    {
+      "type": "box",
+      "x": 25,
+      "y": 3,
+      "w": 3,
+      "h": 40
+    },
+    //les pics d'entrée
+    {
+      "type": "picks",
+      "x": 15,
+      "y": 3,
+      "nb": 3
+    },
+    //1ère plateforme
+    {
+      "type": "box",
+      "x": 18,
+      "y": 10,
+      "w": 10,
+      "h": 1
+    },
+    //2eme plateforme
+    {
+      "type": "box",
+      "x": 0,
+      "y": 18,
+      "w": 8,
+      "h": 1
+    },
+    //3eme plateforme
+    {
+      "type": "box",
+      "x": 18,
+      "y": 26,
+      "w": 8,
+      "h": 1
+    },
+    //4eme plateforme
+    {
+      "type": "box",
+      "x": 0,
+      "y": 34,
+      "w": 8,
+      "h": 1
+    },
+    //5eme plateforme tout en haut
+    {
+      "type": "box",
+      "x": 18,
+      "y": 42,
+      "w": 8,
+      "h": 1
+    },
+    //1ere movingbox
+    {
+      "type": "movingbox",
+      "x":28,
+      "y":42,
+      "x2":53,
+      "y2":42,
+      "w":8,
+      "h":1,
+      "speed": 4
+    },
+    //plateforme picks
+    {
+      "type": "box",
+      "x": 28,
+      "y": 34,
+      "w": 35,
+      "h": 1
+    },
+    //les pics de la plateforme
+    {
+      "type": "picks",
+      "x": 29,
+      "y": 35,
+      "nb": 6
+    },
+    //box au bout des pics
+    {
+      "type": "box",
+      "x": 63,
+      "y": 34,
+      "w": 10,
+      "h": 4
+    },
+    //2eme movingbox
+    {
+      "type": "movingbox",
+      "x":38,
+      "y":18,
+      "x2":100,
+      "y2":18,
+      "w":10,
+      "h":1,
+      "speed": 5
+    },
+    //les pics tout en bas
+    {
+      "type": "picks",
+      "x": 29,
+      "y": 3,
+      "nb": 30
+    },
+    //plateforme de la porte
+    {
+      "type": "box",
+      "x": 80,
+      "y": 43,
+      "w": 20,
+      "h": 3
+    },
+    //colomne a gauche de la porte
+    {
+      "type": "box",
+      "x": 80,
+      "y": 43,
+      "w": 3,
+      "h": 20
+    },
+    //colomne a droite de la porte
+    {
+      "type": "box",
+      "x": 97,
+      "y": 25,
+      "w": 3,
+      "h": 19
+    },
+    //plateforme d'arrivée du movingbox
+    {
+      "type": "box",
+      "x": 110,
+      "y": 18,
+      "w": 10,
+      "h": 1
+    },
+    //3eme movingbox
+    {
+      "type": "movingbox",
+      "x":100,
+      "y":25,
+      "x2":100,
+      "y2":46,
+      "w":8,
+      "h":1,
+      "speed": 4
+    },
+    //porte
+    {
+      "type": "exit",
+      "x" : 84,
+      "y" : 46
+    }
+  ]
+}
