@@ -12,7 +12,7 @@ import com.gdxGame.Screens.MainMenuScreen;
 import com.gdxGame.utils.Bluetooth;
 
 
-public class GameName extends Game implements ApplicationListener{
+public class GameName extends Game {
 
 	public Skin skin;
 	public TextButton.TextButtonStyle bs;

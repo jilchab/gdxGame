@@ -20,7 +20,7 @@ import com.gdxGame.GameName;
 public class HostScreen implements Screen {
 
 	SpriteBatch batch;
-	Skin skin;
+
 	Table tButtons;
 	Stage stage;
 	GameName gamename;
@@ -83,7 +83,7 @@ public class HostScreen implements Screen {
 	public void dispose() {
 		batch.dispose();
 		stage.dispose();
-		skin.dispose();
+
 	}
 
 }

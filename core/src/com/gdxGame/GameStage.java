@@ -34,7 +34,7 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 	private int currentLevel;
 	private String sCurrentLevel;
 	private GameName game;
-	private float TIME_STEP = 1f / 60f;
+	private float timestep = 1f / 60f;
 	private boolean isPause = false,isWin = false;
 	private Image pauseMenu = new Image(new Texture(Gdx.files.internal("pause.png"))),
 	winMenu = new Image(new Texture(Gdx.files.internal("win.png")));
@@ -58,7 +58,7 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 
 	@Override
 	public void act(float delta) {
-		if (TIME_STEP >0) super.act(delta);
+		if (timestep >0) super.act(delta);
 
 		if ( !level.camInfo.fixed && !isWin) {
 			camera.position.set(hero.getX(), hero.getY(), 0f);
@@ -73,7 +73,7 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 			win();
 		}
 
-		level.world.step(TIME_STEP, 6, 2);
+		level.world.step(timestep, 6, 2);
 	}
 
 	@Override
@@ -121,12 +121,12 @@ public class GameStage extends Stage implements ContactListener,InputProcessor {
 	}
 
 	public void pause() {
-		if(TIME_STEP == 0)  {
-			TIME_STEP = 1f/60f;
+		if(timestep == 0)  {
+			timestep = 1f/60f;
 			isPause = false;
 		}
 		else {
-			TIME_STEP = 0;
+			timestep = 0;
 			isPause = true;
 		}
 
